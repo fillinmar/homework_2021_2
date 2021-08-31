@@ -30,10 +30,17 @@ QUnit.module('Тестируем функцию set', function () {
 			deep: null
 		};
 
+		const object5 = {
+			deep: {
+				hested: null
+			}
+		};
+
 		assert.deepEqual(set({foo: 'bar'}, '.foo', 'baz'), {foo: 'baz'});
 		assert.deepEqual(set(object, '.deep.hested.field', 42), object2);
 
 		assert.deepEqual(set(object, '.deep.hested', {foo: 'bar'}), object3);
+		assert.deepEqual(set(object, '.deep.hested', null), object5);
 		assert.deepEqual(set(object, '.deep', null), object4);
 	});
 
@@ -46,9 +53,23 @@ QUnit.module('Тестируем функцию set', function () {
 			foo: 'baz'
 		};
 
-		const object2 = set(object, '.foo', 'baz');
+		const object2 = {
+			deep: {
+				hested: 43
+			}
+		};
+
+		const object3 = {
+			deep: {
+				hested: 0
+			}
+		};
+
+		const object4 = set(object, '.foo', 'baz');
+		const object5 = set(object2, '.deep.hested', 0);
 		assert.deepEqual(object, object1);
-		assert.deepEqual(object2, object1);
+		assert.deepEqual(object4, object1);
+		assert.deepEqual(object5, object3);
 	});
 
 	QUnit.test('set работает правильно c массивами', function (assert) {
@@ -93,6 +114,11 @@ QUnit.module('Тестируем функцию set', function () {
 			}
 		};
 
+		const object1 = {
+			deep: null
+		};
+
 		assert.deepEqual(set({}, '.deep.nested.field', null), object);
+		assert.deepEqual(set({}, '.deep', null), object1);
 	});
 });
