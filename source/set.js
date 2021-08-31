@@ -1,6 +1,6 @@
 'use strict';
 
-function set(obj, path, value) {
+const set = (obj, path, value) => {
     path = path.substring(1);//delete first dot to correct split
     let refObj = obj;
     const pathList = path.split('.');
