@@ -1,14 +1,17 @@
 'use strict';
 /**
  * Установливает значение в свойство объекта
- * @return {Object} объект с новым значением
+ * @param  {Object} obj - Изменяемый объект.
+ * @param  {string} path - Путь к вложенному свойству.
+ * @param  value - Устанавливаемое значение.
+ * @return {Object} Объект с новым значением.
  */
 const set = (obj, path, value) => {
     path = path.substring(1);//delete first dot to correct split
     let refObj = obj;
     const pathList = path.split('.');
     const key = pathList.pop();
-    pathList.forEach(function (item) {
+    pathList.forEach(() => {
         if (!refObj[item]) {
             refObj[item] = {}
         }
